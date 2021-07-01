@@ -1,0 +1,17 @@
+Install Dependencies in dependecies folder:
+
+bcm2835:
+
+cd bcm2835-1.60/
+sudo ./configure
+sudo make
+sudo make check
+sudo make install
+
+wiringPi:
+
+sudo apt-get install wiringpi
+#When used on Raspberry Pi 4B, you may need to upgrade first：
+sudo dpkg -i wiringpi-latest.deb
+gpio -v
+# Run the command "gpio -v". If the version 2.52 is displayed, the installation is successful
