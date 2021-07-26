@@ -8,7 +8,6 @@ Version 1.0 of this code allows you to set the valves to open and closed states.
 Materials:
 Arduino Uno - NOTE: Most other 12v+ compatible boards SHOULD work, although interrupt pins may need to be changed according to pinout. Arduino Nano Every has also been confirmed to work with different interrupt pins.
 A remote wireless relay switch. https://www.amazon.com/gp/product/B077ZQMQDZ
-NOTE: This particular remote is NOT FCC compliant and requires a license to operate on the 433mhz band. If you do not have one, you must find a compliant 902-928MHz band or 2.4GHz remote instead. The final version of this project will have a better suited remote. 
 
 
 
