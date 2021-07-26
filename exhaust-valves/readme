@@ -1,20 +1,46 @@
 You can find the development log here:
 https://www.clublexus.com/forums/lc-model-2018-present/953935-building-a-remote-for-the-stock-exhaust.html
 
-Install Dependencies in dependecies folder:
+There are 2 exhaust modules located in the trunk that control the left and right exhaust valves.
+They are located under the load floor and are tucked into the far left side behind the rear wheel well.
+Version 1.0 of this code allows you to set the valves to open and closed states. There is the option to allow the car to control this as if it were unmodified, but this feature is still being tested.
 
-bcm2835:
+Materials:
+Arduino Uno - NOTE: Most other 12v+ compatible boards SHOULD work, although interrupt pins may need to be changed according to pinout. Arduino Nano Every has also been confirmed to work with different interrupt pins.
+A remote wireless relay switch. https://www.amazon.com/gp/product/B077ZQMQDZ
+NOTE: This particular remote is NOT FCC compliant and requires a license to operate on the 433mhz band. If you do not have one, you must find a compliant 902-928MHz band or 2.4GHz remote instead. The final version of this project will have a better suited remote. 
 
-cd bcm2835-1.60/
-sudo ./configure
-sudo make
-sudo make check
-sudo make install
 
-wiringPi:
 
-sudo apt-get install wiringpi
-#When used on Raspberry Pi 4B, you may need to upgrade first：
-sudo dpkg -i wiringpi-latest.deb
-gpio -v
-# Run the command "gpio -v". If the version 2.52 is displayed, the installation is successful
+Connectors:
+OEM P/N: 6240-5101, 7123-1300
+OEM P/N: 6240-1101, 7122-1300
+
+Wiring:
+NOTE: Space is cramped and you will have to design the piggyback loom lengths accordingly.
+We need to create a piggyback loom to go between the car and module connectors. The connector wirings should be a straight passthrough ie. pin 1 to pin 1, pin 10 to pin 10 except for 4 modifications. We only need to intercept and modify one signal for control of the valves on each module. We also need 12v power from one of the looms. 
+
+Pin 9 carries the exhaust valve angle signal. These will not be passed through. Both sides (Module and Car) will need enough extra length to reach the Arduino. This needs to be done for both modules.
+Both module sides will connect to digital pin 6 on Arduino (These may be separated later)
+ONE car side will connect to digital pin 2 on Arduino (We may read both later)
+
+Pin 8 carries battery voltage and pin 6 is ground. We need to get power from only one loom as well as pass it through to the module.
+This is connected to the Arduino Uno via barrel connector.
+
+The remote board is powered via 5v output of Arduino. COM is connected to 5v as well. 
+You may choose if the car starts up in closed or open mode by deciding to connect Normal Close or Normal Open to Analog pin 0.
+Add a pulldown resistor for Analog 0. 8k ohm is confirmed to be working.
+
+Load Valve_Control.ino and you are good to go
+
+
+
+
+You may also load up Car_Emulator.ino on another board to test and develop features. This will emulate the signal output of the car. 
+
+TODO:
+Emulate proper status signal back to car through pin 4 of module connector. This will prevent codes and should also allow more predictable signal passthrough behavior on pin 9. NOTE: codes do not cause CEL
+Further test and develop signal passthrough.
+Remap car signal for more aggressive valve profile
+Add more exhaust modes via remote.
+Integrate exhaust controls into replacement convertible control trim (for coupe only)
