@@ -1,19 +1,20 @@
 You can find the development log here:
 https://www.clublexus.com/forums/lc-model-2018-present/953935-building-a-remote-for-the-stock-exhaust.html
 
+Support will be limited. 
+
 There are 2 exhaust modules located in the trunk that control the left and right exhaust valves.
 They are located under the load floor and are tucked into the far left side behind the rear wheel well.
 Version 1.0 of this code allows you to set the valves to open and closed states. There is the option to allow the car to control this as if it were unmodified, but this feature is still being tested.
 
 Materials:
 Arduino Uno - NOTE: Most other 12v+ compatible boards SHOULD work, although interrupt pins may need to be changed according to pinout. Arduino Nano Every has also been confirmed to work with different interrupt pins.
-A remote wireless relay switch. https://www.amazon.com/gp/product/B077ZQMQDZ
-
-
+A remote wireless relay switch.
 
 Connectors:
 OEM P/N: 6240-5101, 7123-1300
 OEM P/N: 6240-1101, 7122-1300
+20+ feet of automotive wire
 
 Wiring:
 NOTE: Space is cramped and you will have to design the piggyback loom lengths accordingly.
@@ -32,14 +33,4 @@ Add a pulldown resistor for Analog 0. 8k ohm is confirmed to be working.
 
 Load Valve_Control.ino and you are good to go
 
-
-
-
 You may also load up Car_Emulator.ino on another board to test and develop features. This will emulate the signal output of the car. 
-
-TODO:
-Emulate proper status signal back to car through pin 4 of module connector. This will prevent codes and should also allow more predictable signal passthrough behavior on pin 9. NOTE: codes do not cause CEL
-Further test and develop signal passthrough.
-Remap car signal for more aggressive valve profile
-Add more exhaust modes via remote.
-Integrate exhaust controls into replacement convertible control trim (for coupe only)
