@@ -96,7 +96,7 @@ void falling() {
   attachInterrupt(digitalPinToInterrupt(car), rising, RISING);
   duty = micros()-prev_time;
   duty_cycle = double(duty)/(period*1000);
-//  Serial.println(duty);
+//  Serial.println(duty_cycle);
 }
 
 // Combination of delay ms and us for smoother movement
